@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- Các mục chính -->
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_find_jobs" android:title="@string/find_jobs" android:icon="@drawable/ic_findjobs"/>
+        <item android:id="@+id/nav_application_history" android:title="@string/application_history" android:icon="@drawable/ic_history"/>
+        <item android:id="@+id/nav_manage_resume" android:title="@string/manage_resume" android:icon="@drawable/ic_manage_resume"/>
+        <item android:id="@+id/nav_view_applied_resume" android:title="@string/view_applied_resume" android:icon="@drawable/ic_view_resume"/>
+        <item android:id="@+id/nav_manage_profile" android:title="@string/manage_profile" android:icon="@drawable/ic_profile"/>
+        <item android:id="@+id/nav_messages" android:title="@string/messaging" android:icon="@drawable/ic_messaging"/>
+    </group>
+
+    <!-- Divider -->
+    <item android:title=" "/>
+
+    <!-- Đăng xuất -->
+    <item
+        android:id="@+id/nav_logout"
+        android:title="@string/logout"
+        android:icon="@drawable/ic_logout"
+        app:showAsAction="never"/>
+</menu>

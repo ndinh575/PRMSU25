@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/loginFragment"
+    >
+
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.prmsu25.ui.login.LoginFragment"
+        android:label="Login">
+        <action android:id="@+id/action_login_to_register" app:destination="@id/registerFragment" />
+        <action android:id="@+id/action_login_to_forgotPassword" app:destination="@id/forgotPasswordFragment" />
+        <action android:id="@+id/action_login_to_findJobs" app:destination="@id/findJobsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.prmsu25.ui.register.RegisterFragment"
+        android:label="Register" />
+
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.example.prmsu25.ui.forgotpassword.ForgotPasswordFragment"
+        android:label="Forgot Password" />
+
+    <fragment
+        android:id="@+id/findJobsFragment"
+        android:name="com.example.prmsu25.ui.findjobs.FindJobsFragment"
+        android:label="Find Jobs">
+<!--        <action app:destination="@id/jobDetailFragment" />-->
+    </fragment>
+
+    <fragment
+        android:id="@+id/jobDetailFragment"
+        android:name="com.example.prmsu25.ui.jobdetail.JobDetailFragment"
+        android:label="Job Detail" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.prmsu25.ui.profile.ProfileFragment"
+        android:label="Manage Profile" />
+
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.example.prmsu25.ui.messaging.MessagingFragment"
+        android:label="Messaging" />
+
+    <fragment
+        android:id="@+id/applicationHistoryFragment"
+        android:name="com.example.prmsu25.ui.applicationhistory.ApplicationHistoryFragment"
+        android:label="Application History" />
+
+    <fragment
+        android:id="@+id/manageResumeFragment"
+        android:name="com.example.prmsu25.ui.resume.ResumeFragment"
+        android:label="Manage Resume" />
+
+    <fragment
+        android:id="@+id/viewResumeFragment"
+        android:name="com.example.prmsu25.ui.resumeview.ResumeViewFragment"
+        android:label="View Applied Resume" />
+</navigation>
