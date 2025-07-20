@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,8 @@ public class FindJobsFragment extends Fragment {
 
     private FindJobsViewModel mViewModel;
 
+    private NavController navController;
+
     public static FindJobsFragment newInstance() {
         return new FindJobsFragment();
     }
@@ -25,7 +29,15 @@ public class FindJobsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_find_jobs, container, false);
+        View root = inflater.inflate(R.layout.fragment_find_jobs, container, false);
+
+        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
+
+        root.findViewById(R.id.button).setOnClickListener(v -> {
+            navController.navigate(R.id.action_findJobs_to_jobDetail);
+        });
+
+        return root;
     }
 
     @Override
