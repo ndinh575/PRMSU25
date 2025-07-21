@@ -1,181 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scrollJobDetail"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="#F5F5F5">
+    android:padding="16dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <!-- Progress Bar -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- TITLE -->
-        <TextView
-            android:id="@+id/tvJobTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tiêu đề công việc"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="#1B5E20" />
+    <!-- Error Message -->
+    <TextView
+        android:id="@+id/tvError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Something went wrong"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- MÔ TẢ -->
-        <TextView
-            android:id="@+id/tvJobDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mô tả công việc..."
-            android:layout_marginTop="8dp"
-            android:textColor="#2C3E50" />
+    <!-- Scrollable Content -->
+    <ScrollView
+        android:id="@+id/scrollContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnApply"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- CÁCH THỨC ỨNG TUYỂN (đơn giản) -->
-        <TextView
-            android:id="@+id/tvApplyInstruction"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ứng viên nộp hồ sơ bằng cách bấm Ứng tuyển ngay bên dưới."
-            android:layout_marginTop="16dp"
-            android:textStyle="bold"
-            android:textColor="#2C3E50" />
-
-        <TextView
-            android:id="@+id/tvDeadline"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Hạn nộp hồ sơ: --/--/----"
-            android:layout_marginTop="4dp"
-            android:textColor="#7F8C8D" />
-
-        <!-- BUTTONS -->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp">
-
-            <Button
-                android:id="@+id/btnApply"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Ứng tuyển ngay" />
-
-            <Space
-                android:layout_width="16dp"
-                android:layout_height="wrap_content" />
-
-            <Button
-                android:id="@+id/btnSave"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Lưu tin" />
-        </LinearLayout>
-
-        <!-- CARD THÔNG TIN -->
-        <LinearLayout
-            android:id="@+id/layoutInfoCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/bg_card"
-            android:padding="16dp"
-            android:layout_marginTop="24dp">
+            android:divider="?android:attr/dividerHorizontal"
+            android:showDividers="middle"
+            android:dividerPadding="8dp"
+            android:paddingTop="40dp">
 
+            <!-- Job Title -->
             <TextView
-                android:id="@+id/tvProjectInfoHeader"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Thông tin dự án"
+                android:id="@+id/tvTitle"
+                style="@style/ItemTitle"
+                android:text="Job Title"
+                android:textSize="22sp"
                 android:textStyle="bold"
-                android:textSize="18sp"
-                android:textColor="#388E3C" />
+                android:textColor="@color/black"
+                android:drawableStart="@android:drawable/ic_menu_info_details"
+                android:drawablePadding="8dp" />
 
-            <TextView
-                android:id="@+id/tvProjectId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="ID dự án: " />
+            <!-- General Info -->
+            <include layout="@layout/item_row_info" android:id="@+id/rowLocation"
+                android:tag="Location" />
+            <include layout="@layout/item_row_info" android:id="@+id/rowSalary"
+                android:tag="Salary" />
+            <include layout="@layout/item_row_info" android:id="@+id/rowDeadline"
+                android:tag="Deadline" />
+            <include layout="@layout/item_row_info" android:id="@+id/rowCreatedAt"
+                android:tag="Posted On" />
 
+            <!-- Description -->
             <TextView
-                android:id="@+id/tvProjectCreated"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ngày đăng: " />
-
-            <TextView
-                android:id="@+id/tvProjectLocation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Địa điểm: " />
-
-            <TextView
-                android:id="@+id/tvProjectBudget"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ngân sách: " />
-
-            <TextView
-                android:id="@+id/tvProjectWorkType"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Hình thức làm việc: " />
-
-            <TextView
-                android:id="@+id/tvProjectPayment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Hình thức trả lương: " />
-
-            <!-- THÔNG TIN KHÁCH HÀNG -->
-            <TextView
-                android:id="@+id/tvCustomerHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Thông tin khách hàng"
+                android:text="Description"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="16sp"
                 android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:padding="5dp"/>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/tvDescription" style="@style/ItemContent"
+                android:padding="5dp"/>
+
+            <!-- Requirements -->
+            <TextView
+                android:text="Requirements"
                 android:textStyle="bold"
-                android:textSize="18sp"
-                android:textColor="#388E3C" />
-
-            <ImageView
-                android:id="@+id/imgCustomer"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/ic_person" />
-
-            <TextView
-                android:id="@+id/tvCustomerName"
-                android:layout_width="match_parent"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginTop="12dp"
                 android:layout_height="wrap_content"
-                android:text="Tên khách hàng" />
-
-            <TextView
-                android:id="@+id/tvCustomerJoin"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Tham gia: " />
-
+                android:padding="5dp"/>
             <TextView
-                android:id="@+id/tvCustomerPosted"
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Đã đăng: " />
+                android:layout_width="match_parent"
+                android:id="@+id/tvRequirement" style="@style/ItemContent"
+                android:padding="5dp"/>
+
+            <!-- Additional Fields -->
+            <include layout="@layout/item_row_info" android:id="@+id/rowExperience"
+                android:tag="Experience" />
+            <include layout="@layout/item_row_info" android:id="@+id/rowQuantity"
+                android:tag="Quantity" />
+            <include layout="@layout/item_row_info" android:id="@+id/rowLevel"
+                android:tag="Level" />
+            <include layout="@layout/item_row_info" android:id="@+id/rowIndustry"
+                android:tag="Industry" />
+            <include layout="@layout/item_row_info" android:id="@+id/rowPosition"
+                android:tag="Position" />
+            <include layout="@layout/item_row_info" android:id="@+id/rowDeliveryTime"
+                android:tag="Delivery Time" />
+
         </LinearLayout>
+    </ScrollView>
 
-        <!-- Progress (ẩn/hiện) -->
-        <ProgressBar
-            android:id="@+id/pbLoadingDetail"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:layout_marginTop="32dp" />
+    <!-- Apply Button -->
+    <Button
+        android:id="@+id/btnApply"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Apply Now"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/purple_500"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    </LinearLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

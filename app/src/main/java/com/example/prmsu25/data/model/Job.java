@@ -1,4 +1,4 @@
-package com.example.prmsu25.model;
+package com.example.prmsu25.data.model;
 
 public class Job {
     public String id;

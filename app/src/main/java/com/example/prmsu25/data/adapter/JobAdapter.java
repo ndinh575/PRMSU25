@@ -1,15 +1,13 @@
-package com.example.prmsu25.adapter;
+package com.example.prmsu25.data.adapter;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.prmsu25.R;
-import com.example.prmsu25.model.Job;
+import com.example.prmsu25.data.model.Job;
+import com.example.prmsu25.databinding.ItemJobBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +32,11 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
         notifyDataSetChanged();
     }
 
+    public void clearJobs(){
+        jobList.clear();
+        notifyDataSetChanged();
+    }
+
     public void addJobs(List<Job> newJobs) {
         int start = jobList.size();
         jobList.addAll(newJobs);
@@ -43,9 +46,9 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     @NonNull
     @Override
     public JobViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_job, parent, false);
-        return new JobViewHolder(view);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        ItemJobBinding binding = ItemJobBinding.inflate(inflater, parent, false);
+        return new JobViewHolder(binding);
     }
 
     @Override
@@ -60,20 +63,20 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     }
 
     static class JobViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTitle, tvEmployer, tvLocation, tvSalary;
-        public JobViewHolder(View itemView) {
-            super(itemView);
-            tvTitle = itemView.findViewById(R.id.tvTitle);
-            tvEmployer = itemView.findViewById(R.id.tvEmployer);
-            tvLocation = itemView.findViewById(R.id.tvLocation);
-            tvSalary = itemView.findViewById(R.id.tvSalary);
+        private final ItemJobBinding binding;
+
+        public JobViewHolder(ItemJobBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
+
         void bind(Job job, OnJobClickListener listener) {
-            tvTitle.setText(job.title);
-            tvEmployer.setText(job.employerName);
-            tvLocation.setText(job.location);
-            tvSalary.setText(job.salary != null ? job.salary : "Thoả thuận");
-            itemView.setOnClickListener(v -> {
+            binding.tvTitle.setText(job.title);
+            binding.tvEmployer.setText(job.employerName);
+            binding.tvLocation.setText(job.location);
+            binding.tvSalary.setText(job.salary != null ? job.salary : "Thoả thuận");
+
+            binding.getRoot().setOnClickListener(v -> {
                 if (listener != null) listener.onJobClick(job);
             });
         }
