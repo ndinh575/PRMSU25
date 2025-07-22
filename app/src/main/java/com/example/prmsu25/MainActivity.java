@@ -103,6 +103,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // Kiểm tra token trong SharedPreferences
+        android.content.SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
+        String token = prefs.getString("token", null);
+        if (token == null || token.isEmpty()) {
+            // Nếu chưa có token, chuyển đến màn hình đăng nhập
+            navController.navigate(R.id.loginFragment);
+        }
     }
 
     private void handleLogout() {
