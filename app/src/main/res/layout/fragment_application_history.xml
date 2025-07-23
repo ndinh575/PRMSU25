@@ -1,23 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F5F5"
     tools:context=".ui.applicationhistory.ApplicationHistoryFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!-- Header with title -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:padding="16dp">
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="History"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+            android:text="Công việc đã ứng tuyển"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#00695C"
+            android:layout_gravity="center" />
+
+        <!-- Search Bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:background="@drawable/search_background"
+            android:padding="8dp">
+
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="Tìm kiếm theo tiêu đề, mô tả, lương, vị trí, địa điểm..."
+                android:textColorHint="#999999"
+                android:textSize="14sp"
+                android:padding="8dp" />
+
+            <Button
+                android:id="@+id/btnSearch"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:text="Tìm kiếm"
+                android:textColor="@android:color/white"
+                android:background="#00796B"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Applications List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvApplications"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        tools:listitem="@layout/item_application_history" />
+
+    <!-- Empty State -->
+    <LinearLayout
+        android:id="@+id/layoutEmptyState"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chưa có công việc nào được ứng tuyển"
+            android:textSize="16sp"
+            android:textColor="#666666" />
+    </LinearLayout>
+
+</LinearLayout>
