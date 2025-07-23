@@ -1,11 +1,13 @@
 package com.example.prmsu25;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.Toast;
 
+import com.example.prmsu25.utils.UserSessionManager;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -20,6 +22,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.prmsu25.databinding.ActivityMainBinding;
+
+import okhttp3.OkHttpClient;
+import com.example.prmsu25.data.network.UnsafeOkHttpClient;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -114,10 +119,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void handleLogout() {
-        // Xử lý logout tại đây: xóa token, session,...
+        UnsafeOkHttpClient.clearCookies();
         Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
+        UserSessionManager userSessionManager = new UserSessionManager(this);
+        userSessionManager.clearSession();
         navigateToLoginAndClearBackStack();
-
     }
 
     private void navigateToLoginAndClearBackStack() {
