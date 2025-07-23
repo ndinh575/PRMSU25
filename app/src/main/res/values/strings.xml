@@ -17,4 +17,16 @@
     <string name="manage_resume">Manage Resume</string>
     <string name="logout">Logout</string>
     <string name="view_applied_resume">View Applied Resume</string>
+
+    <string name="registerView_welcome">Xin chào!</string>
+    <string name="registerView_googleBtn">Đăng kí bằng Google</string>
+    <string name="registerView_nameInput">Nhập họ và tên</string>
+    <string name="registerView_emailInput">Nhập email</string>
+    <string name="registerView_passwordInput">Nhập mật khẩu (6 đến 25 ký tự)</string>
+    <string name="registerView_passwordConfirmInput">Nhập lại mật khẩu</string>
+    <string name="registerView_divider">Hoặc bằng email</string>
+    <string name="registerView_termsAgreeText">Tôi đã đọc và đồng ý với Điều khoản dịch vụ và Chính sách bảo mật của W4U.</string>
+    <string name="registerView_registerButton">Đăng kí</string>
+    <string name="registerView_alreadyHaveAccount">Đã có tài khoản?</string>">
+    <string name="registerView_loginButton">Đăng nhập ngay</string>
 </resources>

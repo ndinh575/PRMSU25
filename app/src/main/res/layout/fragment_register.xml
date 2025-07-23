@@ -8,11 +8,12 @@
     tools:context=".ui.register.RegisterFragment">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/registerView_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Xin chào!"
+        android:layout_marginTop="100dp"
+        android:text="@string/registerView_welcome"
+        android:textColor="@color/primary_text"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -20,15 +21,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/registerView_googleBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Đăng kí bằng Google"
+        android:backgroundTint="@color/primary"
+        android:text="@string/registerView_googleBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/registerView_welcome" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -39,7 +41,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button">
+        app:layout_constraintTop_toBottomOf="@+id/registerView_googleBtn">
 
         <View
             android:id="@+id/view"
@@ -53,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Hoặc bằng email"
+            android:text="@string/registerView_divider"
             android:textAlignment="center" />
 
         <View
@@ -68,11 +70,11 @@
         android:id="@+id/flow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="textInputLayout13,textInputLayout14,textInputLayout15,textInputLayout16"
+        android:layout_marginTop="16dp"
+        app:constraint_referenced_ids="@+id/registerView_NameInputLayout,@+id/registerView_EmailInputLayout,@+id/registerView_PasswordInputLayout,@+id/registerView_PasswordConfirmInputLayout"
         app:flow_horizontalStyle="packed"
-        app:flow_orientation="vertical"
         app:flow_verticalAlign="baseline"
-        app:flow_verticalGap="24dp"
+        app:flow_verticalGap="12dp"
         app:flow_wrapMode="chain"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,7 +83,7 @@
         app:layout_constraintVertical_bias="0.060000002" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout13"
+        android:id="@+id/registerView_NameInputLayout"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         app:helperText=""
@@ -89,16 +91,17 @@
         tools:layout_editor_absoluteY="392dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/registerView_nameInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:hint="Nhập họ và tên"
+            android:hint="@string/registerView_nameInput"
             android:textAllCaps="false" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout14"
+        android:id="@+id/registerView_EmailInputLayout"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         app:helperText=""
@@ -106,94 +109,98 @@
         tools:layout_editor_absoluteY="560dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/registerView_emailInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:hint="Nhập email"
+            android:hint="@string/registerView_emailInput"
             android:textAllCaps="false" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout15"
+        android:id="@+id/registerView_PasswordInputLayout"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         app:helperText=""
         tools:layout_editor_absoluteX="2dp"
+        app:passwordToggleEnabled="true"
         tools:layout_editor_absoluteY="323dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/registerView_passwordInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:hint="Nhập mật khẩu (6 đến 25 ký tự)"
+            android:hint="@string/registerView_passwordInput"
             android:textAllCaps="false" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout16"
+        android:id="@+id/registerView_PasswordConfirmInputLayout"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         app:helperText=""
         tools:layout_editor_absoluteX="1dp"
+        app:passwordToggleEnabled="true"
         tools:layout_editor_absoluteY="240dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/registerView_passwordConfirmInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:hint="Nhập lại mật khẩu"
+            android:hint="@string/registerView_passwordConfirmInput"
             android:textAllCaps="false" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <CheckBox
         android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="CheckBox"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/registerView_termsAgreeText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/flow" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/registerView_registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Button"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/primary"
+        android:text="@string/registerView_registerButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
-    <LinearLayout
+
+    <androidx.constraintlayout.helper.widget.Flow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        app:constraint_referenced_ids="registerView_hasAccountTextView,registerView_registerTextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:flow_horizontalGap="12dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2">
+        app:layout_constraintTop_toBottomOf="@+id/registerView_registerButton" />
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Đã có tài khoản?" />
+    <TextView
+        android:id="@+id/registerView_hasAccountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/registerView_alreadyHaveAccount" />
 
-        <Space
-            android:layout_width="8sp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Đăng nhập ngay" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/registerView_registerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="@string/registerView_loginButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
