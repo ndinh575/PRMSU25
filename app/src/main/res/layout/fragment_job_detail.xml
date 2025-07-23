@@ -1,13 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.jobdetail.JobDetailFragment">
+    android:padding="16dp">
 
+    <!-- Progress Bar -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Error Message -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:id="@+id/tvError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Something went wrong"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-</FrameLayout>
+    <!-- Scrollable Content -->
+    <ScrollView
+        android:id="@+id/scrollContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnApply"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:divider="?android:attr/dividerHorizontal"
+            android:showDividers="middle"
+            android:dividerPadding="8dp"
+            android:paddingTop="40dp">
+
+            <!-- Job Title -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvTitle"
+                style="@style/ItemTitle"
+                android:text="Job Title"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:drawableStart="@android:drawable/ic_menu_info_details"
+                android:drawablePadding="8dp" />
+
+            <!-- General Info -->
+            <include layout="@layout/item_row_info" android:id="@+id/rowLocation"
+                android:tag="Location" />
+            <include layout="@layout/item_row_info" android:id="@+id/rowSalary"
+                android:tag="Salary" />
+            <include layout="@layout/item_row_info" android:id="@+id/rowDeadline"
+                android:tag="Deadline" />
+            <include layout="@layout/item_row_info" android:id="@+id/rowCreatedAt"
+                android:tag="Posted On" />
+
+            <!-- Description -->
+            <TextView
+                android:text="Description"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:padding="5dp"/>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/tvDescription" style="@style/ItemContent"
+                android:padding="5dp"/>
+
+            <!-- Requirements -->
+            <TextView
+                android:text="Requirements"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginTop="12dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:padding="5dp"/>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/tvRequirement" style="@style/ItemContent"
+                android:padding="5dp"/>
+
+            <!-- Additional Fields -->
+            <include layout="@layout/item_row_info" android:id="@+id/rowExperience"
+                android:tag="Experience" />
+            <include layout="@layout/item_row_info" android:id="@+id/rowQuantity"
+                android:tag="Quantity" />
+            <include layout="@layout/item_row_info" android:id="@+id/rowLevel"
+                android:tag="Level" />
+            <include layout="@layout/item_row_info" android:id="@+id/rowIndustry"
+                android:tag="Industry" />
+            <include layout="@layout/item_row_info" android:id="@+id/rowPosition"
+                android:tag="Position" />
+            <include layout="@layout/item_row_info" android:id="@+id/rowDeliveryTime"
+                android:tag="Delivery Time" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Apply Button -->
+    <Button
+        android:id="@+id/btnApply"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Apply Now"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/purple_500"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

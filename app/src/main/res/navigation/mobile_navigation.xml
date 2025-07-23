@@ -13,7 +13,11 @@
         android:label="Login">
         <action android:id="@+id/action_login_to_register" app:destination="@id/registerFragment" />
         <action android:id="@+id/action_login_to_forgotPassword" app:destination="@id/forgotPasswordFragment" />
-        <action android:id="@+id/action_login_to_findJobs" app:destination="@id/findJobsFragment" />
+        <action
+            android:id="@+id/action_login_to_findJobs"
+            app:destination="@id/findJobsFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment
@@ -30,13 +34,22 @@
         android:id="@+id/findJobsFragment"
         android:name="com.example.prmsu25.ui.findjobs.FindJobsFragment"
         android:label="Find Jobs">
-<!--        <action app:destination="@id/jobDetailFragment" />-->
+
+        <action
+            android:id="@+id/action_findJobs_to_jobDetail"
+            app:destination="@+id/jobDetailFragment"/>
     </fragment>
 
     <fragment
         android:id="@+id/jobDetailFragment"
         android:name="com.example.prmsu25.ui.jobdetail.JobDetailFragment"
-        android:label="Job Detail" />
+        android:label="Job Detail">
+
+        <argument
+            android:name="jobId"
+            app:argType="string" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/profileFragment"

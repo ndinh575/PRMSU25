@@ -2,12 +2,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <!-- Các mục chính -->
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_find_jobs" android:title="@string/find_jobs" android:icon="@drawable/ic_findjobs"/>
-        <item android:id="@+id/nav_application_history" android:title="@string/application_history" android:icon="@drawable/ic_history"/>
-        <item android:id="@+id/nav_manage_resume" android:title="@string/manage_resume" android:icon="@drawable/ic_manage_resume"/>
-        <item android:id="@+id/nav_view_applied_resume" android:title="@string/view_applied_resume" android:icon="@drawable/ic_view_resume"/>
-        <item android:id="@+id/nav_manage_profile" android:title="@string/manage_profile" android:icon="@drawable/ic_profile"/>
-        <item android:id="@+id/nav_messages" android:title="@string/messaging" android:icon="@drawable/ic_messaging"/>
+        <item android:id="@+id/findJobsFragment" android:title="@string/find_jobs" android:icon="@drawable/ic_findjobs"/>
+        <item android:id="@+id/applicationHistoryFragment" android:title="@string/application_history" android:icon="@drawable/ic_history"/>
+        <item android:id="@+id/manageResumeFragment" android:title="@string/manage_resume" android:icon="@drawable/ic_manage_resume"/>
+        <item android:id="@+id/viewResumeFragment" android:title="@string/view_applied_resume" android:icon="@drawable/ic_view_resume"/>
+        <item android:id="@+id/profileFragment" android:title="@string/manage_profile" android:icon="@drawable/ic_profile"/>
+        <item android:id="@+id/chatFragment" android:title="@string/messaging" android:icon="@drawable/ic_messaging"/>
     </group>
 
     <!-- Divider -->
