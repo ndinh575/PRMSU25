@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 .findFragmentById(R.id.nav_host_fragment_content_main);
         NavController navController = navHostFragment.getNavController();
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if (destination.getId() == R.id.loginFragment) {
+            if (destination.getId() == R.id.loginFragment || destination.getId() == R.id.registerFragment) {
                 binding.toolbar.setVisibility(View.GONE);
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
             } else {
