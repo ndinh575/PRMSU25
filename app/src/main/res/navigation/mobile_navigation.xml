@@ -92,4 +92,9 @@
             android:id="@+id/action_verifyEmailFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/vipFragment"
+        android:name="com.example.prmsu25.ui.vip.VipFragment"
+        android:label="VIP"
+        tools:layout="@layout/fragment_vip" />
 </navigation>
