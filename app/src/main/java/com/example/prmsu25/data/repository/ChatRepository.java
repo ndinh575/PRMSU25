@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData;
 import com.example.prmsu25.data.model.ChatMessage;
 import com.example.prmsu25.data.model.response.ConversationResponse;
 import com.example.prmsu25.data.model.response.MessagesResponse;
+import com.example.prmsu25.data.model.response.RecruiterContactsResponse;
 import com.example.prmsu25.data.network.NetworkResult;
 import com.example.prmsu25.data.network.RetrofitClient;
 import com.example.prmsu25.data.network.SocketManager;
@@ -27,6 +28,7 @@ public class ChatRepository {
         this.sessionManager = sessionManager;
     }
 
+    // Get chat token
     public void authenticateAndConnect() {
         chatApiService.getChatToken().enqueue(new Callback<com.example.prmsu25.data.model.response.TokenResponse>() {
             @Override
@@ -87,6 +89,30 @@ public class ChatRepository {
             }
         });
     }
+
+    public void getRecruiterContacts(JobRepository.JobCallback<RecruiterContactsResponse> callback) {
+        String applicantId = sessionManager.getUserId();
+        if (applicantId == null) {
+            callback.onResult(NetworkResult.error("User not logged in."));
+            return;
+        }
+        chatApiService.getRecruiterContacts(applicantId).enqueue(new Callback<RecruiterContactsResponse>() {
+            @Override
+            public void onResponse(Call<RecruiterContactsResponse> call, Response<RecruiterContactsResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    callback.onResult(NetworkResult.success(response.body()));
+                } else {
+                    callback.onResult(NetworkResult.error("Failed to load contacts."));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RecruiterContactsResponse> call, Throwable t) {
+                callback.onResult(NetworkResult.error(t.getMessage()));
+            }
+        });
+    }
+
 
     public LiveData<ChatMessage> getNewMessageLiveData() {
         return socketManager.getOnNewMessage();

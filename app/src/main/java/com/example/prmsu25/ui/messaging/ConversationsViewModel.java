@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.prmsu25.data.model.response.ConversationResponse;
+import com.example.prmsu25.data.model.response.RecruiterContactsResponse;
 import com.example.prmsu25.data.network.NetworkResult;
 import com.example.prmsu25.data.repository.ChatRepository;
 import com.example.prmsu25.utils.UserSessionManager;
@@ -16,6 +17,10 @@ public class ConversationsViewModel extends AndroidViewModel {
     private final ChatRepository chatRepository;
     private final MutableLiveData<NetworkResult<ConversationResponse>> _conversationsResult = new MutableLiveData<>();
     public final LiveData<NetworkResult<ConversationResponse>> conversationsResult = _conversationsResult;
+
+    private final MutableLiveData<NetworkResult<RecruiterContactsResponse>> _contactsResult = new MutableLiveData<>();
+    public final LiveData<NetworkResult<RecruiterContactsResponse>> contactsResult = _contactsResult;
+
 
     public ConversationsViewModel(@NonNull Application application) {
         super(application);
@@ -27,5 +32,10 @@ public class ConversationsViewModel extends AndroidViewModel {
     public void loadConversations(String query) {
         _conversationsResult.setValue(NetworkResult.loading());
         chatRepository.getConversations(query, result -> _conversationsResult.postValue(result));
+    }
+
+    public void loadRecruiterContacts() {
+        _contactsResult.setValue(NetworkResult.loading());
+        chatRepository.getRecruiterContacts(result -> _contactsResult.postValue(result));
     }
 }

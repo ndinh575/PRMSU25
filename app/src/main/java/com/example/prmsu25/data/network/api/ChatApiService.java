@@ -2,6 +2,7 @@ package com.example.prmsu25.data.network.api;
 
 import com.example.prmsu25.data.model.response.ConversationResponse;
 import com.example.prmsu25.data.model.response.MessagesResponse;
+import com.example.prmsu25.data.model.response.RecruiterContactsResponse;
 import com.example.prmsu25.data.model.response.TokenResponse;
 
 import retrofit2.Call;
@@ -25,4 +26,7 @@ public interface ChatApiService {
             @Query("page") int page,
             @Query("limit") int limit
     );
+
+    @GET("chat/recruiters-by-applications")
+    Call<RecruiterContactsResponse> getRecruiterContacts(@Query("applicantId") String applicantId);
 }
