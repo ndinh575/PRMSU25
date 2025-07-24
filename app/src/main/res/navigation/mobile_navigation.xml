@@ -113,4 +113,9 @@
         android:name="com.example.prmsu25.ui.vip.VipFragment"
         android:label="VIP"
         tools:layout="@layout/fragment_vip" />
+    <fragment
+        android:id="@+id/conversationsFragment"
+        android:name="com.example.prmsu25.ui.messaging.ConversationsFragment"
+        android:label="@string/chat_with_recruiter"
+        tools:layout="@layout/fragment_conversations" />
 </navigation>

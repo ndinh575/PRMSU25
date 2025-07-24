@@ -60,6 +60,7 @@ dependencies {
     implementation libs.converter.gson
     implementation libs.androidx.recyclerview
     implementation libs.androidx.cardview
+    implementation libs.socket.io.client
 
     implementation 'com.squareup.picasso:picasso:2.71828'
 

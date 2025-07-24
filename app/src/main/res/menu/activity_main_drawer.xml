@@ -10,6 +10,7 @@
         <item android:id="@+id/chatFragment" android:title="@string/messaging" android:icon="@drawable/ic_messaging"/>
         <item android:id="@+id/vipFragment" android:title="VIP" android:icon="@drawable/ic_vip"/>
         <item android:id="@+id/recommendedJobFragment" android:title="@string/ai_recommended_jobs" android:icon="@drawable/ic_profile"/>
+        <item android:id="@+id/conversationsFragment" android:title="@string/chat_with_recruiter" android:icon="@drawable/ic_profile"/>
 
     </group>
 

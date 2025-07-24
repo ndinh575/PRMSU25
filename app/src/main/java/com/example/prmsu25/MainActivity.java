@@ -64,7 +64,8 @@ public class MainActivity extends AppCompatActivity {
                 R.id.applicationHistoryFragment,
                 R.id.manageResumeFragment,
                 R.id.viewResumeFragment,
-                R.id.recommendedJobFragment
+                R.id.recommendedJobFragment,
+                R.id.conversationsFragment
         ).setOpenableLayout(drawer).build();
 
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);

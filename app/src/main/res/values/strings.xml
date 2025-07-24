@@ -39,4 +39,6 @@
     <string name="profile_recommended_jobs">Gợi ý bằng hồ sơ</string>
     <string name="recommended_jobs">Việc làm phù hợp</string>
     <string name="recommended_jobs_desc">Các công việc phù hợp nhất với hồ sơ của bạn</string>
+
+    <string name="chat_with_recruiter">Chat với người tuyển dụng</string>
 </resources>
