@@ -25,14 +25,32 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        
+        setupClickListeners(view);
+        
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
-        // TODO: Use the ViewModel
+    }
+
+    private void setupClickListeners(View view) {
+        // Edit Profile Button
+        android.widget.Button btnEditProfile = view.findViewById(R.id.btnEditProfile);
+        btnEditProfile.setOnClickListener(v -> {
+            androidx.navigation.Navigation.findNavController(v).navigate(R.id.action_profile_to_editProfile);
+        });
+
+        // Add Project Button
+        android.widget.Button btnAddProject = view.findViewById(R.id.btnAddProject);
+        btnAddProject.setOnClickListener(v -> {
+            android.widget.Toast.makeText(getContext(), "Thêm dự án mới", android.widget.Toast.LENGTH_SHORT).show();
+            // TODO: Navigate to add project screen
+        });
     }
 
 }
