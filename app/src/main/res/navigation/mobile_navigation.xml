@@ -102,8 +102,12 @@
     <fragment
         android:id="@+id/recommendedJobFragment"
         android:name="com.example.prmsu25.ui.recommendedjobs.RecommendedJobFragment"
-        android:label="fragment_item_list"
-        tools:layout="@layout/fragment_item_list" />
+        android:label="@string/recommended_jobs"
+        tools:layout="@layout/fragment_recommended_jobs" >
+        <action
+            android:id="@+id/action_recommendedJobFragment_to_jobDetailFragment"
+            app:destination="@id/jobDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/vipFragment"
         android:name="com.example.prmsu25.ui.vip.VipFragment"

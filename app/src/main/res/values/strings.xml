@@ -33,6 +33,10 @@
     <string name="verifyEmailView_title">Xác thực email</string>
     <string name="verifyEmailView_verifyButton">Xác thực</string>
     <string name="verifyEmailView_codeInputTitle">Nhập mã xác thực</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="error_fetching_jobs">error_fetching_jobs</string>
+    <string name="ai_recommended_jobs">Gợi ý bằng AI</string>
+    <string name="profile_recommended_jobs">Gợi ý bằng hồ sơ</string>
+    <string name="recommended_jobs">Việc làm phù hợp</string>
+    <string name="recommended_jobs_desc">Các công việc phù hợp nhất với hồ sơ của bạn</string>
 </resources>

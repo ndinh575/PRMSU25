@@ -34,4 +34,10 @@ public interface JobApiService {
             @Part MultipartBody.Part resumeFile,
             @Part("applicantId") RequestBody applicantId
     );
+
+    @GET("job/recommended")
+    Call<JobResponse> getRecommendedJobs();
+
+    @GET("job/ai-recommended")
+    Call<JobResponse> getAIRecommendedJobs();
 }

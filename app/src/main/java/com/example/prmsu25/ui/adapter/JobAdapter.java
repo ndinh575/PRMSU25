@@ -76,6 +76,13 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
             binding.tvLocation.setText(job.location);
             binding.tvSalary.setText(job.salary != null ? job.salary : "Thoả thuận");
 
+            if (job.getCreatedAt() != null && !job.getCreatedAt().isEmpty()) {
+                binding.tvPostedDate.setText(job.getCreatedAt());
+                binding.tvPostedDate.setVisibility(android.view.View.VISIBLE);
+            } else {
+                binding.tvPostedDate.setVisibility(android.view.View.GONE);
+            }
+
             binding.getRoot().setOnClickListener(v -> {
                 if (listener != null) listener.onJobClick(job);
             });

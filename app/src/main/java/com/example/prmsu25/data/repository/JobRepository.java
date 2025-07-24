@@ -41,4 +41,43 @@ public class JobRepository {
             }
         });
     }
+
+    public void getRecommendedJobs(JobCallback<JobResponse> callback) {
+        callback.onResult(NetworkResult.loading());
+        apiService.getRecommendedJobs().enqueue(new Callback<JobResponse>() {
+            @Override
+            public void onResponse(Call<JobResponse> call, Response<JobResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    callback.onResult(NetworkResult.success(response.body()));
+                } else {
+                    callback.onResult(NetworkResult.error("Failed to fetch recommended jobs."));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JobResponse> call, Throwable t) {
+                callback.onResult(NetworkResult.error(t.getMessage()));
+            }
+        });
+    }
+
+    public void getAIRecommendedJobs(JobCallback<JobResponse> callback) {
+        callback.onResult(NetworkResult.loading());
+        apiService.getAIRecommendedJobs().enqueue(new Callback<JobResponse>() {
+            @Override
+            public void onResponse(Call<JobResponse> call, Response<JobResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    callback.onResult(NetworkResult.success(response.body()));
+                } else {
+                    callback.onResult(NetworkResult.error("Failed to fetch AI-recommended jobs."));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JobResponse> call, Throwable t) {
+                callback.onResult(NetworkResult.error(t.getMessage()));
+            }
+        });
+    }
+
 }
