@@ -16,6 +16,4 @@ public class User {
     public String getAccountType() { return accountType; }
     public int getPoints() { return points; }
 
-
 }
-

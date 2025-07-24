@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
+    android:id="@+id/fragment_register"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.register.RegisterFragment">
@@ -67,11 +67,11 @@
     </LinearLayout>
 
     <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flow"
+        android:id="@+id/wid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:constraint_referenced_ids="@+id/registerView_NameInputLayout,@+id/registerView_EmailInputLayout,@+id/registerView_PasswordInputLayout,@+id/registerView_PasswordConfirmInputLayout"
+        app:constraint_referenced_ids="registerView_NameInputLayout,registerView_EmailInputLayout,registerView_PasswordInputLayout,registerView_PasswordConfirmInputLayout"
         app:flow_horizontalStyle="packed"
         app:flow_verticalAlign="baseline"
         app:flow_verticalGap="12dp"
@@ -80,12 +80,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.060000002" />
+        app:layout_constraintVertical_bias="0.06" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/registerView_NameInputLayout"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
+        app:boxStrokeColor="@color/primary"
+        app:hintTextColor="@color/primary"
         app:helperText=""
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="392dp">
@@ -104,6 +106,8 @@
         android:id="@+id/registerView_EmailInputLayout"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
+        app:boxStrokeColor="@color/primary"
+        app:hintTextColor="@color/primary"
         app:helperText=""
         tools:layout_editor_absoluteX="2dp"
         tools:layout_editor_absoluteY="560dp">
@@ -122,6 +126,8 @@
         android:id="@+id/registerView_PasswordInputLayout"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
+        app:boxStrokeColor="@color/primary"
+        app:hintTextColor="@color/primary"
         app:helperText=""
         tools:layout_editor_absoluteX="2dp"
         app:passwordToggleEnabled="true"
@@ -134,13 +140,16 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:hint="@string/registerView_passwordInput"
-            android:textAllCaps="false" />
+            android:inputType="textPassword"
+            android:textAllCaps="false"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/registerView_PasswordConfirmInputLayout"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
+        app:boxStrokeColor="@color/primary"
+        app:hintTextColor="@color/primary"
         app:helperText=""
         tools:layout_editor_absoluteX="1dp"
         app:passwordToggleEnabled="true"
@@ -153,7 +162,8 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:hint="@string/registerView_passwordConfirmInput"
-            android:textAllCaps="false" />
+            android:inputType="textPassword"
+            android:textAllCaps="false"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <CheckBox
@@ -166,7 +176,7 @@
         android:text="@string/registerView_termsAgreeText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flow" />
+        app:layout_constraintTop_toBottomOf="@+id/wid" />
 
     <Button
         android:id="@+id/registerView_registerButton"
@@ -183,7 +193,7 @@
     <androidx.constraintlayout.helper.widget.Flow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="registerView_hasAccountTextView,registerView_registerTextView"
+        app:constraint_referenced_ids="registerView_hasAccountTextView,registerView_loginTextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:flow_horizontalGap="12dp"
@@ -197,7 +207,7 @@
         android:text="@string/registerView_alreadyHaveAccount" />
 
     <TextView
-        android:id="@+id/registerView_registerTextView"
+        android:id="@+id/registerView_loginTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"

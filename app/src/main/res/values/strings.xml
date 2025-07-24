@@ -29,4 +29,8 @@
     <string name="registerView_registerButton">Đăng kí</string>
     <string name="registerView_alreadyHaveAccount">Đã có tài khoản?</string>">
     <string name="registerView_loginButton">Đăng nhập ngay</string>
+
+    <string name="verifyEmailView_title">Xác thực email</string>
+    <string name="verifyEmailView_verifyButton">Xác thực</string>
+    <string name="verifyEmailView_codeInputTitle">Nhập mã xác thực</string>
 </resources>
