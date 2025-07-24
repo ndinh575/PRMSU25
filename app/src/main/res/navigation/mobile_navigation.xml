@@ -75,10 +75,14 @@
         android:name="com.example.prmsu25.ui.messaging.MessagingFragment"
         android:label="Messaging" />
 
-    <fragment
+     <fragment
         android:id="@+id/applicationHistoryFragment"
         android:name="com.example.prmsu25.ui.applicationhistory.ApplicationHistoryFragment"
-        android:label="Application History" />
+        android:label="Application History">
+        <action
+            android:id="@+id/action_applicationHistory_to_jobDetail"
+            app:destination="@+id/jobDetailFragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/manageResumeFragment"
