@@ -16,7 +16,7 @@ public class UserSessionManager {
     private static final String KEY_USER_EMAIL = "user_email";
     private static final String KEY_USER_TYPE = "user_type";
     private static final String KEY_USER_POINTS = "user_points";
-
+    private static final String KEY_CHAT_TOKEN = "chat_token";
     private final SharedPreferences sharedPreferences;
     private final SharedPreferences.Editor editor;
 
@@ -57,6 +57,16 @@ public class UserSessionManager {
     public int getUserPoints() {
         return sharedPreferences.getInt(KEY_USER_POINTS, 0);
     }
+
+    public void saveChatToken(String token) {
+        editor.putString(KEY_CHAT_TOKEN, token);
+        editor.apply();
+    }
+
+    public String getChatToken() {
+        return sharedPreferences.getString(KEY_CHAT_TOKEN, null);
+    }
+
 
     // Clear session
     public void clearSession() {
