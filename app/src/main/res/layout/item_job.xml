@@ -3,43 +3,69 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:elevation="2dp"
-    android:background="#FFFFFF">
+    android:elevation="4dp"
+    android:background="@android:color/white"
+    >
 
     <LinearLayout
         android:orientation="vertical"
-        android:padding="12dp"
+        android:padding="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
 
+        <!-- Job Title -->
         <TextView
             android:id="@+id/tvTitle"
-            android:text="Tiêu đề công việc"
+            android:text="Job Title"
             android:textStyle="bold"
             android:textColor="#2C3E50"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <!-- Employer -->
         <TextView
             android:id="@+id/tvEmployer"
-            android:text="Công ty"
+            android:text="Employer Name"
             android:textColor="#7F8C8D"
+            android:textSize="14sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <!-- Job Location -->
         <TextView
             android:id="@+id/tvLocation"
-            android:text="Địa điểm"
+            android:text="Location"
             android:textColor="#3498DB"
+            android:textSize="14sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <!-- Job Salary -->
         <TextView
             android:id="@+id/tvSalary"
-            android:text="Lương"
+            android:text="Salary"
             android:textColor="#27AE60"
+            android:textSize="14sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <!-- Job Info Footer -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/tvPostedDate"
+                android:text="Posted 2 days ago"
+                android:textColor="#BDC3C7"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

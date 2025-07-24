@@ -75,4 +75,9 @@
         android:id="@+id/viewResumeFragment"
         android:name="com.example.prmsu25.ui.resumeview.ResumeViewFragment"
         android:label="View Applied Resume" />
+    <fragment
+        android:id="@+id/vipFragment"
+        android:name="com.example.prmsu25.ui.vip.VipFragment"
+        android:label="VIP"
+        tools:layout="@layout/fragment_vip" />
 </navigation>

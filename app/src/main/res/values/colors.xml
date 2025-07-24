@@ -10,4 +10,11 @@
     <color name="primary">#386641</color>
     <color name="primary_text">#23432a</color>
     <color name="secondary_text">#7a8b7a</color>
+
+
+    <color name="lightGrey">#f6f6f6</color>
+    <color name="grey">#e5e4e4</color>
+    <color name="darkGrey">#858585</color>
+    <color name="purple">#6235b9</color>
+    <color name="orange">#fed442</color>
 </resources>

@@ -1,13 +1,17 @@
 package com.example.prmsu25.ui.jobdetail;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
-import android.text.Html;
+import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,40 +19,30 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import com.example.prmsu25.databinding.FragmentJobDetailBinding;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
-
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.prmsu25.databinding.FragmentJobDetailBinding;
 import com.example.prmsu25.data.model.JobDetail;
 import com.example.prmsu25.data.network.NetworkResult;
-import com.example.prmsu25.databinding.FragmentJobDetailBinding;
-import com.example.prmsu25.databinding.ItemRowInfoBinding;
-import com.example.prmsu25.ui.jobdetail.JobDetailViewModel;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.Date;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class JobDetailFragment extends Fragment {
 
     private FragmentJobDetailBinding binding;
     private JobDetailViewModel viewModel;
+    private static final int PICK_CV_REQUEST = 1;
+    private Uri resumeUri;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,6 +61,25 @@ public class JobDetailFragment extends Fragment {
             observeJobDetail();
             viewModel.fetchJobDetail(jobId);
         }
+
+        // Initialize apply button click listener
+        Button applyButton = binding.btnApply;
+        applyButton.setOnClickListener(v -> {
+            if (resumeUri != null) {
+                applyForJob(jobId, resumeUri);
+            } else {
+                Toast.makeText(getContext(), "Please select a CV file", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Handle file picker for selecting CV
+        binding.btnUploadCV.setOnClickListener(view1 -> {
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.setType("application/pdf|application/msword|application/vnd.openxmlformats-officedocument.wordprocessingml.document|image/*");  // Cho phép chọn PDF, DOC, DOCX, JPG, PNG
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false);  // Chỉ cho phép chọn 1 file
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);  // Cấp quyền đọc cho file đã chọn
+            startActivityForResult(intent, PICK_CV_REQUEST);
+        });
     }
 
     private void observeJobDetail() {
@@ -92,27 +105,21 @@ public class JobDetailFragment extends Fragment {
     }
 
     private void bindJobData(JobDetail job) {
+        // Set the job data directly to the corresponding views
         binding.tvTitle.setText(job.getTitle());
-
         binding.tvDescription.setText(job.getDescription());
-        binding.tvRequirement.setText(job.getRequirements().isEmpty() ? "Không yêu cầu" : job.getRequirements());
+        binding.tvRequirements.setText(TextUtils.isEmpty(job.getRequirements()) ? "Không yêu cầu" : job.getRequirements());
 
-        setBoldText(binding.rowSalary, "Salary", job.getSalary());
-        setBoldText(binding.rowExperience, "Experience", job.getExperience().isEmpty() ? "Không yêu cầu" : job.getExperience());
-        setBoldText(binding.rowQuantity, "Quantity", String.valueOf(job.getQuantity()));
-        setBoldText(binding.rowLevel, "Level", job.getLevel());
-        setBoldText(binding.rowIndustry, "Industry", job.getIndustry());
-        setBoldText(binding.rowPosition, "Position", job.getPosition());
-        setBoldText(binding.rowDeliveryTime, "Delivery Time", job.getDeliveryTime());
+        // Direct binding for other job details
+        binding.tvSalary.setText(job.getSalary());
+        binding.tvExperience.setText(TextUtils.isEmpty(job.getExperience()) ? "Không yêu cầu" : job.getExperience());
+        binding.tvQuantity.setText(String.valueOf(job.getQuantity()));
+        binding.tvLevel.setText(job.getLevel());
+        binding.tvIndustry.setText(job.getIndustry());
 
-        setBoldText(binding.rowLocation, "Location", job.getLocation());
-        setBoldText(binding.rowDeadline, "Deadline", formatDate(job.getDeadline()));
-        setBoldText(binding.rowCreatedAt, "Created At", formatDate(job.getCreatedAt()));
-    }
-
-    private void setBoldText(ItemRowInfoBinding rowBinding, String label, String value) {
-        rowBinding.tvLabel.setText(label);
-        rowBinding.tvValue.setText(value);
+        binding.tvLocation.setText(job.getLocation());
+        binding.tvDeadline.setText(formatDate(job.getDeadline()));
+        binding.tvCreatedAt.setText(formatDate(job.getCreatedAt()));
     }
 
     private String formatDate(String isoDate) {
@@ -125,14 +132,87 @@ public class JobDetailFragment extends Fragment {
             SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
             return outputFormat.format(date);
         } catch (Exception e) {
-            return isoDate;
+            return isoDate; // Return the original if there's an error
         }
+    }
+
+    private void applyForJob(String jobId, Uri resumeUri) {
+        try {
+            // Lấy InputStream từ URI
+            InputStream inputStream = requireContext().getContentResolver().openInputStream(resumeUri);
+
+            // Tạo RequestBody từ InputStream
+            RequestBody requestFile = RequestBody.create(
+                    MediaType.parse(requireContext().getContentResolver().getType(resumeUri)),
+                    inputStream.toString()
+            );
+
+            // Tạo MultipartBody.Part từ RequestBody
+            MultipartBody.Part body = MultipartBody.Part.createFormData("resumeFile", getFileNameFromUri(resumeUri), requestFile);
+
+            // Thêm applicantId vào request body (giả sử đã có applicantId)
+            RequestBody applicantId = RequestBody.create(MediaType.parse("text/plain"), "userId");
+
+            // Gọi viewModel để nộp đơn
+            viewModel.applyForJob(jobId, body, applicantId);
+
+            viewModel.getApplicationLiveData().observe(getViewLifecycleOwner(), result -> {
+                switch (result.getStatus()) {
+                    case LOADING:
+                        binding.progressBar.setVisibility(View.VISIBLE);
+                        break;
+                    case SUCCESS:
+                        binding.progressBar.setVisibility(View.GONE);
+                        Toast.makeText(getContext(), "Application submitted successfully", Toast.LENGTH_SHORT).show();
+                        break;
+                    case ERROR:
+                        binding.progressBar.setVisibility(View.GONE);
+                        Toast.makeText(getContext(), "Failed to apply for job", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            });
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Toast.makeText(getContext(), "File not found", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_CV_REQUEST && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                Uri selectedUri = data.getData();
+
+                // Kiểm tra loại file đã chọn (PDF, DOCX)
+                String mimeType = getContext().getContentResolver().getType(selectedUri);
+                if (mimeType != null && (mimeType.equals("application/pdf") || mimeType.equals("application/msword") || mimeType.equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document"))) {
+                    resumeUri = selectedUri;
+                    binding.tvSelectedFile.setText("CV selected: " + resumeUri.getLastPathSegment());
+                } else {
+                    Toast.makeText(getContext(), "Invalid file type. Please select a PDF or DOC file.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    private String getFileNameFromUri(Uri uri) {
+        String fileName = null;
+        Cursor cursor = getContext().getContentResolver().query(uri, null, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            int columnIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+            if (columnIndex != -1) {
+                fileName = cursor.getString(columnIndex);
+            }
+            cursor.close();
+        }
+        return fileName;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
+        binding = null; // Clean up binding
     }
 }
-
