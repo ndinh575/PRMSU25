@@ -92,4 +92,9 @@
             android:id="@+id/action_verifyEmailFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/recommendedJobFragment"
+        android:name="com.example.prmsu25.ui.recommendedjobs.RecommendedJobFragment"
+        android:label="fragment_item_list"
+        tools:layout="@layout/fragment_item_list" />
 </navigation>
