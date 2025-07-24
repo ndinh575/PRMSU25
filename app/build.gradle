@@ -60,5 +60,8 @@ dependencies {
     implementation libs.converter.gson
     implementation libs.androidx.recyclerview
     implementation libs.androidx.cardview
+
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
 }
 

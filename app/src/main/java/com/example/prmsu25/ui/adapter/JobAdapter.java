@@ -1,4 +1,4 @@
-package com.example.prmsu25.data.adapter;
+package com.example.prmsu25.ui.adapter;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;

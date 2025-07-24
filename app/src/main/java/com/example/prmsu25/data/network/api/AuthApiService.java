@@ -1,8 +1,10 @@
 package com.example.prmsu25.data.network.api;
 
+import com.example.prmsu25.data.model.response.ForgotPasswordResponse;
 import com.example.prmsu25.data.model.response.LoginResponse;
 import com.example.prmsu25.data.model.response.RegisterResponse;
 import com.example.prmsu25.data.model.response.VerifyEmailResponse;
+import com.example.prmsu25.data.network.dto.ForgotPasswordRequest;
 import com.example.prmsu25.data.network.dto.LoginRequest;
 import com.example.prmsu25.data.network.dto.RegisterRequest;
 import com.example.prmsu25.data.network.dto.VerifyEmailRequest;
@@ -20,4 +22,7 @@ public interface AuthApiService {
 
     @POST("auth/verify-email")
     Call<VerifyEmailResponse> verifyEmail(@Body VerifyEmailRequest request);
+
+    @POST("user/forgot_password")
+    Call<ForgotPasswordResponse> forgotPassword(@Body ForgotPasswordRequest request);
 }

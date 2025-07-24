@@ -1,11 +1,9 @@
 package com.example.prmsu25.ui.findjobs;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.prmsu25.R;
 import com.example.prmsu25.data.model.Job;
 import com.example.prmsu25.databinding.FragmentFindJobsBinding;
-import com.example.prmsu25.data.adapter.JobAdapter;
+import com.example.prmsu25.ui.adapter.JobAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -144,7 +142,7 @@ public class FindJobsFragment extends Fragment {
                     break;
                 case SUCCESS:
                     binding.progressBar.setVisibility(android.view.View.GONE);
-                    List<Job> jobs = result.data != null ? result.data.getData() : new ArrayList<>();
+                    List<Job> jobs = result.getData() != null ? result.getData().getData() : new ArrayList<>();
                     if (page == 1) adapter.setJobs(jobs);
                     else adapter.addJobs(jobs);
                     isLastPage = jobs.size() < limit;

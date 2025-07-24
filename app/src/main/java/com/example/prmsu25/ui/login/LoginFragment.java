@@ -16,6 +16,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +63,10 @@ public class LoginFragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.action_login_to_register)
         );
 
+        binding.tvForgotPassword.setOnClickListener(v ->{
+            Navigation.findNavController(v).navigate(R.id.action_login_to_forgotPassword);
+        });
+
         // Observe login result
         loginViewModel.getLoginResult().observe(getViewLifecycleOwner(), result -> {
             if(result == null) return;
@@ -88,7 +93,7 @@ public class LoginFragment extends Fragment {
     }
 
     private boolean validateInput(String email, String password) {
-        if (TextUtils.isEmpty(email)) {
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             binding.tilEmail.setError("Email không được để trống");
             return false;
         } else {
