@@ -16,7 +16,7 @@ public class UserSessionManager {
     private static final String KEY_CITY = "user_city";
     private static final String KEY_DISTRICT = "user_district";
     private static final String KEY_PHONE = "user_phone";
-
+    private static final String KEY_CHAT_TOKEN = "chat_token";
     private final SharedPreferences sharedPreferences;
     private final SharedPreferences.Editor editor;
 
@@ -80,6 +80,16 @@ public class UserSessionManager {
         savedUser.setEmail(getUserEmail());
         return savedUser;
     }
+
+    public void saveChatToken(String token) {
+        editor.putString(KEY_CHAT_TOKEN, token);
+        editor.apply();
+    }
+
+    public String getChatToken() {
+        return sharedPreferences.getString(KEY_CHAT_TOKEN, null);
+    }
+
 
     // Clear session
     public void clearSession() {

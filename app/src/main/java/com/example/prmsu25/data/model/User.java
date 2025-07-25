@@ -1,8 +1,11 @@
 package com.example.prmsu25.data.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class User {
+    @SerializedName(value = "_id", alternate = "id")
     private String id;
     private String name;
     private String email;

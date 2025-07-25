@@ -11,11 +11,12 @@ public class Job {
     public String position;
     public String level;
     public String salary;
+    public String createdAt;
 
     public Job() {
     }
 
-    public Job(String id, String title, String employerName, String description, String location, String experience, String industry, String position, String level, String salary) {
+    public Job(String id, String title, String employerName, String description, String location, String experience, String industry, String position, String level, String salary, String createdAt) {
         this.id = id;
         this.title = title;
         this.employerName = employerName;
@@ -26,6 +27,7 @@ public class Job {
         this.position = position;
         this.level = level;
         this.salary = salary;
+        this.createdAt = createdAt;
     }
 
     public String getId() {
@@ -106,5 +108,13 @@ public class Job {
 
     public void setSalary(String salary) {
         this.salary = salary;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 }

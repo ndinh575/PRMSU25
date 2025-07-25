@@ -9,6 +9,7 @@ if (localPropertiesFile.exists()) {
 }
 
 def BASE_URL = localProperties.getProperty("BASE_URL")
+def SOCKET_URL = localProperties.getProperty("SOCKET_URL")
 
 android {
     namespace 'com.example.prmsu25'
@@ -23,6 +24,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "BASE_URL", "\"${BASE_URL}\""
+        buildConfigField "String", "SOCKET_URL", "\"${SOCKET_URL}\""
     }
 
     buildTypes {
@@ -61,6 +63,7 @@ dependencies {
     implementation libs.converter.gson
     implementation libs.androidx.recyclerview
     implementation libs.androidx.cardview
+    implementation libs.socket.io.client
 
     implementation libs.picasso
 
