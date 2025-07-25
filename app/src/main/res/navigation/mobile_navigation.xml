@@ -120,7 +120,7 @@
     <fragment
         android:id="@+id/chatFragment"
         android:name="com.example.prmsu25.ui.chat.ChatFragment"
-        android:label="fragment_chat"
+        android:label="@string/chat"
         tools:layout="@layout/fragment_chat" />
     <fragment
         android:id="@+id/activeChatsFragment"

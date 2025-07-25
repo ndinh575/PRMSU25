@@ -1,5 +1,7 @@
 package com.example.prmsu25.data.repository;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 
 import com.example.prmsu25.data.model.ChatMessage;
@@ -12,12 +14,15 @@ import com.example.prmsu25.data.network.SocketManager;
 import com.example.prmsu25.data.network.api.ChatApiService;
 import com.example.prmsu25.utils.UserSessionManager;
 
+import java.util.Arrays;
+
+import io.socket.client.Socket;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ChatRepository {
-
+    private final String LOGTAG = "CHATREPO";
     private final ChatApiService chatApiService;
     private final SocketManager socketManager;
     private final UserSessionManager sessionManager;
@@ -41,7 +46,8 @@ public class ChatRepository {
 
             @Override
             public void onFailure(Call<com.example.prmsu25.data.model.response.TokenResponse> call, Throwable t) {
-                // Handle failure
+                Log.e(LOGTAG, "Failed to get chat token: " + t.getMessage(), t);
+
             }
         });
     }

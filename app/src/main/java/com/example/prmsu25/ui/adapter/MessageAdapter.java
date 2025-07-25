@@ -29,7 +29,7 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public void addMessage(ChatMessage message) {
-        messageList.add(0, message); // Add to top for chat UI
+        messageList.add(0, message);
         notifyItemInserted(0);
     }
 

@@ -1,6 +1,7 @@
 package com.example.prmsu25.ui.chat;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +63,7 @@ public class ChatFragment extends Fragment {
     private void setupInput() {
         binding.btnSend.setOnClickListener(v -> {
             String message = binding.etMessageInput.getText().toString().trim();
+            Log.d("ChatFragment", "Message: " + message + ", ReceiverId: " + receiverId);
             if (!message.isEmpty() && receiverId != null) {
                 viewModel.sendMessage(receiverId, message);
                 binding.etMessageInput.setText("");
@@ -71,7 +73,6 @@ public class ChatFragment extends Fragment {
 
     private void setupObservers() {
         viewModel.messagesResult.observe(getViewLifecycleOwner(), result -> {
-            // Handle loading historical messages
             if (result.getStatus() == NetworkResult.Status.SUCCESS && result.getData() != null) {
                 adapter.setMessages(result.getData().getData());
             } else if (result.getStatus() == NetworkResult.Status.ERROR) {
@@ -80,7 +81,6 @@ public class ChatFragment extends Fragment {
         });
 
         viewModel.newMessage.observe(getViewLifecycleOwner(), chatMessage -> {
-            // Handle new incoming message
             if (chatMessage != null && (chatMessage.getReceiverId().equals(receiverId) || chatMessage.getSenderId().equals(receiverId))) {
                 adapter.addMessage(chatMessage);
                 binding.rvMessages.scrollToPosition(0);

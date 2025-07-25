@@ -40,5 +40,6 @@
     <string name="recommended_jobs">Việc làm phù hợp</string>
     <string name="recommended_jobs_desc">Các công việc phù hợp nhất với hồ sơ của bạn</string>
 
-    <string name="chat_with_recruiter">Chat với người tuyển dụng</string>
+    <string name="chat_with_recruiter">Chat với nhà tuyển dụng</string>
+    <string name="chat">Chat</string>
 </resources>
