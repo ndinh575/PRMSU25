@@ -5,17 +5,17 @@ import android.content.SharedPreferences;
 
 import com.example.prmsu25.data.model.User;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class UserSessionManager {
     private static final String PREF_NAME = "user_session_pref";
     private static final String KEY_IS_LOGGED_IN = "is_logged_in";
     private static final String KEY_USER_ID = "user_id";
     private static final String KEY_USER_NAME = "user_name";
     private static final String KEY_USER_EMAIL = "user_email";
-    private static final String KEY_USER_TYPE = "user_type";
-    private static final String KEY_USER_POINTS = "user_points";
+    private static final String KEY_AVATAR_URL = "user_avatar_url";
+
+    private static final String KEY_CITY = "user_city";
+    private static final String KEY_DISTRICT = "user_district";
+    private static final String KEY_PHONE = "user_phone";
 
     private final SharedPreferences sharedPreferences;
     private final SharedPreferences.Editor editor;
@@ -26,9 +26,15 @@ public class UserSessionManager {
     }
 
     // Save login session
-    public void saveUserSession(String id) {
+    public void saveUserSession(User user) {
         editor.putBoolean(KEY_IS_LOGGED_IN, true);
-        editor.putString(KEY_USER_ID, id);
+        editor.putString(KEY_USER_ID, user.getId());
+        editor.putString(KEY_USER_NAME, user.getName());
+        editor.putString(KEY_USER_EMAIL, user.getEmail());
+        editor.putString(KEY_AVATAR_URL, user.getAvatarUrl());
+        editor.putString(KEY_CITY, user.getCity());
+        editor.putString(KEY_DISTRICT, user.getDistrict());
+        editor.putString(KEY_PHONE, user.getPhone());
         editor.apply();
     }
 
@@ -50,12 +56,29 @@ public class UserSessionManager {
         return sharedPreferences.getString(KEY_USER_EMAIL, null);
     }
 
-    public String getUserType() {
-        return sharedPreferences.getString(KEY_USER_TYPE, null);
+    public String getUserAvatarUrl(){return sharedPreferences.getString(KEY_AVATAR_URL, null);}
+
+    public String getUserCity(){
+        return sharedPreferences.getString(KEY_CITY, null);
     }
 
-    public int getUserPoints() {
-        return sharedPreferences.getInt(KEY_USER_POINTS, 0);
+    public String getUserDistrict(){
+        return sharedPreferences.getString(KEY_DISTRICT, null);
+    }
+
+    public String getUserPhone(){
+        return sharedPreferences.getString(KEY_PHONE, null);
+    }
+
+    public User getSavedUser(){
+        User savedUser = new User();
+        savedUser.setName(getUserName());
+        savedUser.setAvatarUrl(getUserAvatarUrl());
+        savedUser.setCity(getUserCity());
+        savedUser.setDistrict(getUserDistrict());
+        savedUser.setPhone(getUserPhone());
+        savedUser.setEmail(getUserEmail());
+        return savedUser;
     }
 
     // Clear session

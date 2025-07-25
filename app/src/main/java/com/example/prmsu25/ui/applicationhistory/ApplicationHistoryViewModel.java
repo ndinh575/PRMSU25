@@ -29,6 +29,6 @@ public class ApplicationHistoryViewModel extends ViewModel {
     }
 
     public void getApplicationHistory(int page, int limit, String search){
-        repository.getApplicationHistory(page, limit, search, result -> applicationHistoryLiveData.postValue(result));
+        repository.getApplicationHistory(page, limit, search, applicationHistoryLiveData::postValue);
     }
 }

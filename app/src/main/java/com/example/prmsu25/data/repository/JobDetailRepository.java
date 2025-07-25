@@ -52,7 +52,7 @@ public class JobDetailRepository {
         return jobDetailLiveData;
     }
 
-    public void applyForJob(String jobId, MultipartBody.Part resumeFile, RequestBody applicantId, JobRepository.JobCallback callback) {
+    public void applyForJob(String jobId, MultipartBody.Part resumeFile, RequestBody applicantId, RepositoryCallback callback) {
         callback.onResult(NetworkResult.loading());
 
         apiService.applyJob(jobId, resumeFile, applicantId).enqueue(new Callback<ApplicationResponse>() {
@@ -72,7 +72,4 @@ public class JobDetailRepository {
         });
     }
 
-    public interface JobCallback<T> {
-        void onResult(NetworkResult<T> result);
-    }
 }

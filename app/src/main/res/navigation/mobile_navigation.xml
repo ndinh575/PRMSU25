@@ -67,7 +67,7 @@
 
     <fragment
         android:id="@+id/editProfileFragment"
-        android:name="com.example.prmsu25.ui.profile.EditProfileFragment"
+        android:name="com.example.prmsu25.ui.editprofile.EditProfileFragment"
         android:label="Edit Profile" />
 
     <fragment

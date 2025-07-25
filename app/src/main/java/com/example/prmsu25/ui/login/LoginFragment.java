@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.prmsu25.MainActivity;
 import com.example.prmsu25.R;
 import com.example.prmsu25.data.model.User;
 import com.example.prmsu25.databinding.FragmentLoginBinding;
@@ -45,7 +46,8 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        userSessionManager = new UserSessionManager(getContext());
+        if(userSessionManager.isLoggedIn()) Navigation.findNavController(view).navigate(R.id.action_login_to_findJobs);
         loginViewModel = new ViewModelProvider(requireActivity()).get(LoginViewModel.class);
 
         // Handle login button
@@ -69,7 +71,9 @@ public class LoginFragment extends Fragment {
 
         // Observe login result
         loginViewModel.getLoginResult().observe(getViewLifecycleOwner(), result -> {
-            if(result == null) return;
+            if(result == null){
+                 return;
+            }
             switch (result.getStatus()) {
                 case LOADING:
                     binding.btnLogin.setEnabled(false);
@@ -78,8 +82,8 @@ public class LoginFragment extends Fragment {
                 case SUCCESS:
                     binding.btnLogin.setEnabled(true);
                     Toast.makeText(requireContext(), "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-                    userSessionManager = new UserSessionManager(getContext());
-                    userSessionManager.saveUserSession(result.getData().getUser().getId());
+                    userSessionManager.saveUserSession(result.getData().getUser());
+                    ((MainActivity) requireActivity()).updateNavHeader();
                     Navigation.findNavController(view).navigate(R.id.action_login_to_findJobs);
                     loginViewModel.resetLoginResult();
                     break;

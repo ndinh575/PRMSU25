@@ -13,15 +13,11 @@ import retrofit2.Response;
 public class JobRepository {
     private final JobApiService apiService;
 
-    public interface JobCallback<T> {
-        void onResult(NetworkResult<T> result);
-    }
-
     public JobRepository(JobApiService apiService) {
         this.apiService = apiService;
     }
 
-    public void getJobs(int page, int limit, String keywords, JobCallback<JobResponse> callback) {
+    public void getJobs(int page, int limit, String keywords, RepositoryCallback<JobResponse> callback) {
         callback.onResult(NetworkResult.loading());
 
         apiService.getJobs(page, limit, keywords).enqueue(new Callback<JobResponse>() {

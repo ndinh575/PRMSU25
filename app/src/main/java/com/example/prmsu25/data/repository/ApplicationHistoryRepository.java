@@ -20,15 +20,11 @@ import retrofit2.Response;
 public class ApplicationHistoryRepository {
     private final ApplicationHistoryApiService apiService;
 
-    public interface ApplicationHistoryCallback<T> {
-        void onResult(NetworkResult<T> result);
-    }
-
     public ApplicationHistoryRepository(ApplicationHistoryApiService apiService) {
         this.apiService = apiService;
     }
 
-    public void getApplicationHistory(int page, int limit, String search, ApplicationHistoryCallback<ApplicationHistoryResponse> callback) {
+    public void getApplicationHistory(int page, int limit, String search, RepositoryCallback<ApplicationHistoryResponse> callback) {
 
         callback.onResult(NetworkResult.loading());
 
@@ -39,7 +35,6 @@ public class ApplicationHistoryRepository {
                     callback.onResult(NetworkResult.success(response.body()));
                 } else {
                     callback.onResult(NetworkResult.error("Error"));
-                    Log.d("ERROR", "Error");
                 }
             }
 

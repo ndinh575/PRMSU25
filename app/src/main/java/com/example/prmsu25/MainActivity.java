@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.prmsu25.utils.UserSessionManager;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+    private UserSessionManager userSessionManager;
 
     private long lastBackPressedTime = 0;
     private static final long DOUBLE_BACK_PRESS_INTERVAL = 2000;
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        userSessionManager = new UserSessionManager(this);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -55,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
             }
         });
-        // Các màn hình chính trong Drawer
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.loginFragment,
                 R.id.findJobsFragment,
@@ -69,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        // Xử lý nút logout ở footer
         MenuItem logoutItem = navigationView.getMenu().findItem(R.id.nav_logout);
         if (logoutItem != null) {
             logoutItem.setOnMenuItemClickListener(item -> {
@@ -87,10 +89,7 @@ public class MainActivity extends AppCompatActivity {
                         currentDestId == R.id.registerFragment ||
                         currentDestId == R.id.forgotPasswordFragment) {
                     finishAffinity();
-                    return;
-                }
-
-                if (currentDestId == R.id.findJobsFragment) {
+                } else {
                     long currentTime = System.currentTimeMillis();
                     if (currentTime - lastBackPressedTime < DOUBLE_BACK_PRESS_INTERVAL) {
                         finishAffinity();
@@ -98,22 +97,14 @@ public class MainActivity extends AppCompatActivity {
                         lastBackPressedTime = currentTime;
                         Toast.makeText(MainActivity.this, "Press back again to exit", Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    // Navigate back to main screen
-                    navController.navigate(R.id.findJobsFragment, null,
-                            new NavOptions.Builder()
-                                    .setPopUpTo(R.id.findJobsFragment, true)
-                                    .build()
-                    );
                 }
             }
         });
 
-        // Kiểm tra token trong SharedPreferences
         android.content.SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
         String token = prefs.getString("token", null);
+
         if (token == null || token.isEmpty()) {
-            // Nếu chưa có token, chuyển đến màn hình đăng nhập
             navController.navigate(R.id.loginFragment);
         }
     }
@@ -121,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
     private void handleLogout() {
         UnsafeOkHttpClient.clearCookies();
         Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
-        UserSessionManager userSessionManager = new UserSessionManager(this);
         userSessionManager.clearSession();
         navigateToLoginAndClearBackStack();
     }
@@ -137,6 +127,19 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+    public void updateNavHeader(){
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        TextView nameNav = headerView.findViewById(R.id.namenav);
+        TextView emailNav = headerView.findViewById(R.id.emailnav);
+        if(userSessionManager.isLoggedIn()){
+            nameNav.setText(userSessionManager.getUserName());
+            emailNav.setText(userSessionManager.getUserEmail());
+        }else{
+            nameNav.setText(null);
+            emailNav.setText(null);
+        }
+    }
 
     @Override
     public boolean onSupportNavigateUp() {

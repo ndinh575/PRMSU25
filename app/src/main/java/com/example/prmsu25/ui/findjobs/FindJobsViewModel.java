@@ -24,6 +24,6 @@ public class FindJobsViewModel extends ViewModel {
     }
 
     public void fetchJobs(int page, int limit, String keywords) {
-        jobRepository.getJobs(page, limit, keywords, result -> jobsLiveData.postValue(result));
+        jobRepository.getJobs(page, limit, keywords, jobsLiveData :: postValue);
     }
 }
