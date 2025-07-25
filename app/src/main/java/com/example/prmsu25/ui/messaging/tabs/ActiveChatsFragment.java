@@ -9,8 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.prmsu25.R;
 import com.example.prmsu25.databinding.FragmentActiveChatsBinding;
 import com.example.prmsu25.ui.adapter.ConversationAdapter;
 import com.example.prmsu25.ui.messaging.ConversationsViewModel;
@@ -39,8 +41,12 @@ public class ActiveChatsFragment extends Fragment {
     }
 
     private void setupRecyclerView() {
+
+
         ConversationAdapter adapter = new ConversationAdapter(conversation -> {
-            // TODO: Navigate to ChatFragment
+            Bundle bundle = new Bundle();
+            bundle.putString("receiverId", conversation.getReceiverId());
+            Navigation.findNavController(requireView()).navigate(R.id.action_conversationsFragment_to_chatFragment, bundle);
         });
         binding.rvConversations.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rvConversations.setAdapter(adapter);

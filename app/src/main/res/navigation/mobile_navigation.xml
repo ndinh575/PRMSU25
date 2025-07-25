@@ -71,11 +71,6 @@
         android:label="Edit Profile" />
 
     <fragment
-        android:id="@+id/chatFragment"
-        android:name="com.example.prmsu25.ui.messaging.MessagingFragment"
-        android:label="Messaging" />
-
-    <fragment
         android:id="@+id/applicationHistoryFragment"
         android:name="com.example.prmsu25.ui.applicationhistory.ApplicationHistoryFragment"
         android:label="Application History" />
@@ -117,5 +112,30 @@
         android:id="@+id/conversationsFragment"
         android:name="com.example.prmsu25.ui.messaging.ConversationsFragment"
         android:label="@string/chat_with_recruiter"
-        tools:layout="@layout/fragment_conversations" />
+        tools:layout="@layout/fragment_conversations" >
+        <action
+            android:id="@+id/action_conversationsFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.example.prmsu25.ui.chat.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/activeChatsFragment"
+        android:name="com.example.prmsu25.ui.messaging.tabs.ActiveChatsFragment"
+        android:label="ActiveChatsFragment" >
+        <action
+            android:id="@+id/action_activeChatsFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recruiterContactsFragment"
+        android:name="com.example.prmsu25.ui.messaging.tabs.RecruiterContactsFragment"
+        android:label="RecruiterContactsFragment" >
+        <action
+            android:id="@+id/action_recruiterContactsFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
 </navigation>

@@ -9,8 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.prmsu25.R;
 import com.example.prmsu25.databinding.FragmentRecruiterContactsBinding;
 import com.example.prmsu25.ui.adapter.RecruiterContactAdapter;
 import com.example.prmsu25.ui.messaging.ConversationsViewModel;
@@ -40,7 +42,9 @@ public class RecruiterContactsFragment extends Fragment {
 
     private void setupRecyclerView() {
         RecruiterContactAdapter adapter = new RecruiterContactAdapter(contact -> {
-            // TODO: Navigate to ChatFragment
+            Bundle bundle = new Bundle();
+            bundle.putString("receiverId", contact.getRecruiter().getId());
+            Navigation.findNavController(requireView()).navigate(R.id.action_conversationsFragment_to_chatFragment, bundle);
         });
         binding.rvContacts.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rvContacts.setAdapter(adapter);
