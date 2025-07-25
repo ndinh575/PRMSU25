@@ -2,6 +2,7 @@ package com.example.prmsu25.data.network.api;
 
 import com.example.prmsu25.data.model.response.AvatarUploadResponse;
 import com.example.prmsu25.data.model.response.ProfileResponse;
+import com.example.prmsu25.data.model.response.ResetPasswordResponse;
 
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 public interface UserApiService {
     @GET("user/profile")
@@ -24,4 +26,10 @@ public interface UserApiService {
     @Multipart
     @POST("upload_avatar")
     Call<AvatarUploadResponse> uploadAvatar(@Part MultipartBody.Part avatarFile);
+
+    @POST("user/reset_password/{token}")
+    Call<ResetPasswordResponse> resetPassword(
+            @Path("token") String token,
+            @Body Map<String, String> passwordData
+    );
 }

@@ -63,12 +63,18 @@
         android:name="com.example.prmsu25.ui.profile.ProfileFragment"
         android:label="Manage Profile">
         <action android:id="@+id/action_profile_to_editProfile" app:destination="@id/editProfileFragment" />
+        <action android:id="@+id/action_profile_to_resetPassword" app:destination="@id/resetPasswordFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/editProfileFragment"
-        android:name="com.example.prmsu25.ui.editprofile.EditProfileFragment"
+        android:name="com.example.prmsu25.ui.profile.EditProfileFragment"
         android:label="Edit Profile" />
+
+    <fragment
+        android:id="@+id/resetPasswordFragment"
+        android:name="com.example.prmsu25.ui.forgotpassword.ResetPasswordFragment"
+        android:label="Reset Password" />
 
     <fragment
         android:id="@+id/chatFragment"

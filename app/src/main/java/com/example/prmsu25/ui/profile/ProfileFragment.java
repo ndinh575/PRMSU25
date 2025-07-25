@@ -85,6 +85,8 @@ public class ProfileFragment extends Fragment {
                 .into(binding.ivProfileAvatar);
 
         binding.btnEditProfile.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_profile_to_editProfile));
+        
+        binding.btnChangePassword.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_profile_to_resetPassword));
     }
 
     @Override
