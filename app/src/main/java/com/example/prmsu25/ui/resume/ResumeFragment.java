@@ -23,6 +23,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.prmsu25.data.adapter.ResumeListAdapter;
 import com.example.prmsu25.data.model.ResumeItem;
 
 import com.example.prmsu25.R;
